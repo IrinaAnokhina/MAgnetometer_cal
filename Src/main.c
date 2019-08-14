@@ -48,6 +48,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Sensors.h"
+#include "Calculations.h"
+#include "mtVector.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -72,7 +75,7 @@ HAL_StatusTypeDef status;
 struct SAccValue AccValue;
 
 struct SMagValue MagValue;
-
+float calibrated_values[3]={0}; 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -93,7 +96,23 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+int16_t TEMP = 0;//MPU6050_R_2b(0x3B);//AX
+int16_t WMI = 0;//MPU6050_R_2b(0x3B);//AY
+int16_t ID = 0;//MPU6050_R_2b(0x3B);//AY
 
+int32_t AXL = 0;//MPU6050_R_2b(0x3B);//AX
+int32_t AYL = 0;//MPU6050_R_2b(0x3B);//AY
+int32_t AZL = 0;//MPU6050_R_2b(0x3B);//AY
+
+int32_t GXL = 0;//MPU6050_R_2b(0x3B);//AX
+int32_t GYL = 0;//MPU6050_R_2b(0x3B);//AY
+int32_t GZL = 0;//MPU6050_R_2b(0x3B);//AY
+
+int32_t MXL = 0;//MPU6050_R_2b(0x3B);//AX
+int32_t MYL = 0;//MPU6050_R_2b(0x3B);//AY
+int32_t MZL = 0;//MPU6050_R_2b(0x3B);//AY
+
+float FAX,FAY,FAZ,FGX,FGY,FGZ,FMX,FMY,FMZ;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -119,11 +138,11 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 init_sensors();
- __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
-uint8_t str2[150];
-char len = sprintf ((char*)str2, "START!");
+// __HAL_UART_ENABLE_IT(&huart2, UART_IT_TXE);
+uint8_t str2[150] = "START!";
+//char len = sprintf ((char*)str2, "START!");
 	
-	 HAL_UART_Transmit(&huart2, str2, sizeof(str2), 1000);
+	 HAL_UART_Transmit(&huart2, str2, 8, 100);
 
 	//USARTSend("Dev init. 115200");
   /* USER CODE END 2 */
@@ -132,7 +151,87 @@ char len = sprintf ((char*)str2, "START!");
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+		if(HAL_GPIO_ReadPin(Mag_int_GPIO_Port, Mag_int_Pin) == GPIO_PIN_SET)
+		{
+			for (int cyc = 0; cyc<100; cyc++)
+	{
+			 read_acc();
+			 read_mag();
+	
+		char kf=240,ks=50;
+	//AX = filterAX(AX,kf,ks);
+	AccValue.y = filterAY(AccValue.y,kf,ks);
+	AccValue.z = filterAZ(AccValue.z,kf,ks);
+	
+	/*GX = filterGX(GX,kf,ks);
+	GY = filterGY(GY,kf,ks);
+	GZ = filterGZ(GZ,kf,ks);*/
+	
+	MagValue.x = filterMX(MagValue.x,kf,ks);
+	MagValue.y = filterMY(MagValue.y,kf,ks);
+	MagValue.z = filterMZ(MagValue.z,kf,ks);
+	
+	float cof = 0.999;
+	FAX = filterEXP(AccValue.x, FAX, cof);
+	FAY = filterEXP(AccValue.y, FAY, cof);
+	FAZ = filterEXP(AccValue.z, FAZ, cof);
+
+	float cofM = 0.999;
+	FMX = filterEXP(MagValue.x, FMX, cofM);
+	FMY = filterEXP(MagValue.y, FMY, cofM);
+	FMZ = filterEXP(MagValue.z, FMZ, cofM);
+}
+	
+	AccValue.x=FAX;
+AccValue.y=FAY;
+AccValue.z=FAZ;	
+	
+MagValue.x=FMX;
+MagValue.y=FMY;
+MagValue.z=FMZ;	
+
+if(1){
+		
+			// calibration magnetometr
+	calibrated_values[0]=MagValue.x;
+  calibrated_values[1]=MagValue.y;
+	calibrated_values[2]=MagValue.z;
+	transformation_MAG( calibrated_values);
+  MagValue.x=calibrated_values[0];
+	MagValue.y=calibrated_values[1];
+	MagValue.z=calibrated_values[2];
+	
+	// calibration AXEL
+	calibrated_values[0]=AccValue.x;
+  calibrated_values[1]=AccValue.y;
+	calibrated_values[2]=AccValue.z;
+	transformation_AXEL( calibrated_values);
+	AccValue.x=calibrated_values[0];
+	AccValue.y=calibrated_values[1];
+	AccValue.z=calibrated_values[2];
+}
+	MTVec3D Mag = { MagValue.x, MagValue.y, MagValue.z };
+  
+//MTVec3D Mag = { -MY, -MX, MZ };
+MTVec3D Axl = { AccValue.x, AccValue.y, AccValue.z };
+
+//	Mag = mtMultiplyVectorScalar(Mag,0.001);
+//	Axl = mtMultiplyVectorScalar(Axl,0.001);
+	
+float Az = Fi_Azimuth(Axl, Mag);
+//	Az = 368756785.57468;
+//Az= 	(float)sin((double)3.0f);
+ID = Az*10;
+
+	char str[150];
+//char len = sprintf (str, "START: AX%d AY%d AZ%d GX%d GY%d GZ%d MX%d MY%d MZ%d TEMP%d WMI%d ID%d END\n",AX , AY, AZ,GX,GY,GZ,MX,MY,MZ,TEMP,WMI,ID);
+char len = sprintf (str, "START: AX%d AY%d AZ%d GX%d GY%d GZ%d MX%d MY%d MZ%d TEMP%d WMI%d ID%d END\n",AccValue.x, AccValue.y, AccValue.z,
+	0,0,0,MagValue.x,MagValue.y,MagValue.z,TEMP,WMI,ID);
+
+ HAL_UART_Transmit(&huart2, str2, sizeof(str2), 100);
+HAL_Delay(100);
+  }  
+		/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }

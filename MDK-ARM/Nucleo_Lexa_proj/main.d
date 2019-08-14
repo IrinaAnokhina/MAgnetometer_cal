@@ -36,3 +36,7 @@ nucleo_lexa_proj\main.o: ../Inc/spi.h
 nucleo_lexa_proj\main.o: ../Inc/usart.h
 nucleo_lexa_proj\main.o: ../Inc/gpio.h
 nucleo_lexa_proj\main.o: ..\User_files\Sensors.h
+nucleo_lexa_proj\main.o: ..\User_files\Calculations.h
+nucleo_lexa_proj\main.o: ..\User_files\mtVector.h
+nucleo_lexa_proj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+nucleo_lexa_proj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
