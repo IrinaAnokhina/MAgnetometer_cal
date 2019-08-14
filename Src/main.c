@@ -69,6 +69,10 @@
 
 /* USER CODE BEGIN PV */
 HAL_StatusTypeDef status;
+struct SAccValue AccValue;
+
+struct SMagValue MagValue;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/

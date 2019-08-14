@@ -1,6 +1,6 @@
 Dependencies for Project 'Nucleo_Lexa_proj', Target 'Nucleo_Lexa_proj': (DO NOT MODIFY !)
 F (startup_stm32f401xe.s)(0x5D52D535)(--cpu Cortex-M4.fp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_Nucleo_Lexa_proj-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 526" --pd "_RTE_ SETA 1" --pd "STM32F401xE SETA 1"--list startup_stm32f401xe.lst --xref -o nucleo_lexa_proj\startup_stm32f401xe.o --depend nucleo_lexa_proj\startup_stm32f401xe.d)
-F (..\User_files\Sensors.c)(0x5D52D191)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\User_files-I.\RTE\_Nucleo_Lexa_proj-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F401xE -DUSE_HAL_DRIVER -DSTM32F401xE-o nucleo_lexa_proj\sensors.o --omf_browse nucleo_lexa_proj\sensors.crf --depend nucleo_lexa_proj\sensors.d)
+F (..\User_files\Sensors.c)(0x5D53DE77)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\User_files-I.\RTE\_Nucleo_Lexa_proj-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F401xE -DUSE_HAL_DRIVER -DSTM32F401xE-o nucleo_lexa_proj\sensors.o --omf_browse nucleo_lexa_proj\sensors.crf --depend nucleo_lexa_proj\sensors.d)
 I (../Inc/i2c.h)(0x5D52D531)
 I (../Inc/main.h)(0x5D52D532)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5BD35396)
@@ -33,9 +33,9 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x5BD35396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5BD35396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5BD35396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5BD35396)
-I (..\User_files\Sensors.h)(0x5D5290AF)
-F (..\User_files\Sensors.h)(0x5D5290AF)()
-F (../Src/main.c)(0x5D52E0F1)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\User_files-I.\RTE\_Nucleo_Lexa_proj-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F401xE -DUSE_HAL_DRIVER -DSTM32F401xE-o nucleo_lexa_proj\main.o --omf_browse nucleo_lexa_proj\main.crf --depend nucleo_lexa_proj\main.d)
+I (..\User_files\Sensors.h)(0x5D53DE77)
+F (..\User_files\Sensors.h)(0x5D53DE77)()
+F (../Src/main.c)(0x5D53DE77)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\User_files-I.\RTE\_Nucleo_Lexa_proj-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F401xE -DUSE_HAL_DRIVER -DSTM32F401xE-o nucleo_lexa_proj\main.o --omf_browse nucleo_lexa_proj\main.crf --depend nucleo_lexa_proj\main.d)
 I (../Inc/main.h)(0x5D52D532)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5BD35396)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5D52D532)
@@ -71,7 +71,7 @@ I (../Inc/i2c.h)(0x5D52D531)
 I (../Inc/spi.h)(0x5D52D532)
 I (../Inc/usart.h)(0x5D52D532)
 I (../Inc/gpio.h)(0x5D52D531)
-I (..\User_files\Sensors.h)(0x5D5290AF)
+I (..\User_files\Sensors.h)(0x5D53DE77)
 F (../Src/gpio.c)(0x5D52D531)(--c99 -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\User_files-I.\RTE\_Nucleo_Lexa_proj-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F401xE -DUSE_HAL_DRIVER -DSTM32F401xE-o nucleo_lexa_proj\gpio.o --omf_browse nucleo_lexa_proj\gpio.crf --depend nucleo_lexa_proj\gpio.d)
 I (../Inc/gpio.h)(0x5D52D531)
 I (../Inc/main.h)(0x5D52D532)
