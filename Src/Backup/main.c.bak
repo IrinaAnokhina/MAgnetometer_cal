@@ -231,7 +231,7 @@ char len = sprintf (str, "START: AX%d AY%d AZ%d GX%d GY%d GZ%d MX%d MY%d MZ%d TE
  HAL_UART_Transmit(&huart2, str2, sizeof(str2), 100);
 HAL_Delay(100);
   }  
-		/* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }

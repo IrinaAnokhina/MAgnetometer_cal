@@ -134,15 +134,15 @@ float FAX,FAY,FAZ,FGX,FGY,FGZ,FMX,FMY,FMZ;
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_SPI1_Init();
-  MX_USART2_UART_Init();
   MX_I2C1_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 init_sensors();
 // __HAL_UART_ENABLE_IT(&huart2, UART_IT_TXE);
 uint8_t str2[150] = "START!";
 //char len = sprintf ((char*)str2, "START!");
 	
-	 HAL_UART_Transmit(&huart2, str2, 8, 100);
+	 HAL_UART_Transmit(&huart1, str2, 8, 100);
 
 	//USARTSend("Dev init. 115200");
   /* USER CODE END 2 */
@@ -171,12 +171,12 @@ uint8_t str2[150] = "START!";
 	MagValue.y = filterMY(MagValue.y,kf,ks);
 	MagValue.z = filterMZ(MagValue.z,kf,ks);
 	
-	float cof = 0.999;
+	float cof = 0.9;
 	FAX = filterEXP(AccValue.x, FAX, cof);
 	FAY = filterEXP(AccValue.y, FAY, cof);
 	FAZ = filterEXP(AccValue.z, FAZ, cof);
 
-	float cofM = 0.999;
+	float cofM = 0.9;
 	FMX = filterEXP(MagValue.x, FMX, cofM);
 	FMY = filterEXP(MagValue.y, FMY, cofM);
 	FMZ = filterEXP(MagValue.z, FMZ, cofM);
@@ -223,15 +223,15 @@ float Az = Fi_Azimuth(Axl, Mag);
 //Az= 	(float)sin((double)3.0f);
 ID = Az*10;
 
-	char str[150];
+	uint8_t str[150];
 //char len = sprintf (str, "START: AX%d AY%d AZ%d GX%d GY%d GZ%d MX%d MY%d MZ%d TEMP%d WMI%d ID%d END\n",AX , AY, AZ,GX,GY,GZ,MX,MY,MZ,TEMP,WMI,ID);
-char len = sprintf (str, "START: AX%d AY%d AZ%d GX%d GY%d GZ%d MX%d MY%d MZ%d TEMP%d WMI%d ID%d END\n",AccValue.x, AccValue.y, AccValue.z,
+char len = sprintf ((char*)str, "START: AX%d AY%d AZ%d GX%d GY%d GZ%d MX%d MY%d MZ%d TEMP%d WMI%d ID%d END\r\n",AccValue.x, AccValue.y, AccValue.z,
 	0,0,0,MagValue.x,MagValue.y,MagValue.z,TEMP,WMI,ID);
 
- HAL_UART_Transmit(&huart2, str2, sizeof(str2), 100);
-HAL_Delay(100);
+ HAL_UART_Transmit(&huart1, str, len, 100);
+//HAL_Delay(100);
   }  
-		/* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
